@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/articleNew.css') }}">
+{% endblock %}
+
+{% block title %}Ajouter un article{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un article</h1>
+
+    <form method="POST" action="{{ path('app_article_new') }}">
+        <div>
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom">
+        </div>
+
+        <div>
+            <label for="price">Prix :</label>
+            <input type="text" id="price" name="price"  maxlength="6" inputmode="numeric">
+        </div>
+
+        <div>
+            <label for="quantite">Quantité :</label>
+            <input type="text" id="quantite" name="quantite"  inputmode="numeric" pattern="[0-9]*">
+        </div>
+
+        <div>
+            <label for="description">Description :</label>
+            <textarea id="description" name="description"></textarea>
+        </div>
+
+        <button type="submit">Ajouter</button>
+    </form>
+{% endblock %}

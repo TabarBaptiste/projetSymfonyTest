@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/articleEdit.css') }}">
+{% endblock %}
+
+
+{% block title %}Modifier un article
+{% endblock %}
+
+{% block body %}
+    <h1>Modification {{ article.nom }}</h1>
+
+		<form method="POST" action="{{ url('app_article_edit', {'id': 3}) }}">
+			{{ form_row(form.nom) }}
+			{{ form_row(form.price) }}
+			{{ form_row(form.quantite) }}
+			{{ form_row(form.description) }}
+
+			<button type="submit">Modifier</button>
+		</form>
+
+{% endblock %}

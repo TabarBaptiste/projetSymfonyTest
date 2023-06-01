@@ -13,7 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-
 class ArticleController extends AbstractController
 {
     private $entityManager;
@@ -65,9 +64,12 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/article/edit/{id}', name: 'app_article_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function edit(Request $request, Article $article): Response
+    public function edit(Request $request, Article $article, $id): Response
     {
-        // Création du formulaire de modification
+        $entityManager = $this->entityManager;
+        $article = $entityManager->getRepository(Article::class)->find($id);
+
+            // Création du formulaire de modification
         $form = $this->createFormBuilder($article)
             ->add('nom', TextType::class)
             ->add('price', NumberType::class)
@@ -80,6 +82,11 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Vérifier si la valeur de stock est null
+            if ($article->getStock() === null) {
+                $article->setStock('non');
+            }
+
             // Enregistrer les modifications en base de données
             $this->entityManager->flush();
 
@@ -93,12 +100,4 @@ class ArticleController extends AbstractController
         ]);
     }
 
-
-
-    /*public function index(): Response
-    {
-        return $this->render('article/index.html.twig', [
-            'controller_name' => 'ArticleController',
-        ]);
-    }*/
 }

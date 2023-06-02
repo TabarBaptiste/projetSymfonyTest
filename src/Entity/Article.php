@@ -26,9 +26,6 @@ class Article
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 3)]
-    private ?string $stock = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -67,9 +64,6 @@ class Article
     {
         $this->quantite = $quantite;
         
-        // Mettre à jour la valeur du stock en fonction de la quantité
-        $this->stock = ($quantite >= 1) ? 'oui' : 'non';
-
         return $this;
     }
 
@@ -85,15 +79,4 @@ class Article
         return $this;
     }
 
-    public function getStock(): ?string
-    {
-        return $this->stock;
-    }
-
-    public function setStock(string $stock): self
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
 }

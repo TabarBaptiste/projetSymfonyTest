@@ -6,3 +6,5 @@ app_article_edit:
   path: "/article/edit/{id}"
   controller: 'App\Controller\ArticleController::edit'
   methods: ["GET", "POST"]
+  requirements:
+    id: '\d+'

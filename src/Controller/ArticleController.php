@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ArticleController extends AbstractController
 {
@@ -42,7 +43,6 @@ class ArticleController extends AbstractController
             $price = $request->request->get('price');
             $quantite = $request->request->get('quantite');
             $description = $request->request->get('description');
-            $stock = ($quantite >= 1) ? 'oui' : 'non';
 
             // Créer une nouvelle instance d'Article
             $article = new Article();
@@ -50,7 +50,6 @@ class ArticleController extends AbstractController
             $article->setPrice($price);
             $article->setQuantite($quantite);
             $article->setDescription($description);
-            $article->setStock($stock);
 
             // Enregistrer l'article en base de données
             $this->entityManager->persist($article);
@@ -69,31 +68,29 @@ class ArticleController extends AbstractController
         $entityManager = $this->entityManager;
         $article = $entityManager->getRepository(Article::class)->find($id);
 
-            // Création du formulaire de modification
+        // Création du formulaire de modification
         $form = $this->createFormBuilder($article)
             ->add('nom', TextType::class)
             ->add('price', NumberType::class)
             ->add('quantite', NumberType::class)
             ->add('description', TextareaType::class)
-            ->add('stock', TextType::class)
             ->add('save', SubmitType::class, ['label' => 'Modifier'])
+            //->add('_token', HiddenType::class)
             ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Vérifier si la valeur de stock est null
-            if ($article->getStock() === null) {
-                $article->setStock('non');
-            }
-
             // Enregistrer les modifications en base de données
             $this->entityManager->flush();
 
             // Rediriger vers la liste des articles
             return $this->redirectToRoute('app_article');
         }
-
+        else {
+            print($form->getErrors(true, false));
+        }
+        
         return $this->render('article/edit.html.twig', [
             'form' => $form->createView(),
             'article' => $article,

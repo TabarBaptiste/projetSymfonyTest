@@ -12,7 +12,10 @@
 	<h1>Modification
 		{{ article.nom }}</h1>
 
-	<form method="POST" action="{{ url('app_article_edit', {'id': article.id}) }}">
+
+	<form
+		method="POST" action="{{ url('app_article_edit', {'id': article.id}) }}">
+		<!--{{ form_widget(form._token) }}-->
 		{{ form_row(form.nom) }}
 		{{ form_row(form.price) }}
 		{{ form_row(form.quantite) }}

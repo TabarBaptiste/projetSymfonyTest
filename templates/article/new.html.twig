@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/articleNew.css') }}">
+{% endblock %}
+
 {% block title %}Ajouter un article{% endblock %}
 
 {% block body %}
@@ -13,12 +18,12 @@
 
         <div>
             <label for="price">Prix :</label>
-            <input type="text" id="price" name="price"  maxlength="6" inputmode="numeric">
+            <input type="number" id="price" name="price"  maxlength="6" inputmode="numeric" min="0" step="0.1">
         </div>
 
         <div>
             <label for="quantite">Quantité :</label>
-            <input type="text" id="quantite" name="quantite"  inputmode="numeric" pattern="[0-9]*">
+            <input type="number" id="quantite" name="quantite"  inputmode="numeric"  min="0" pattern="[0-9]*">
         </div>
 
         <div>

@@ -12,7 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ArticleController extends AbstractController
 {
@@ -86,11 +85,10 @@ class ArticleController extends AbstractController
 
             // Rediriger vers la liste des articles
             return $this->redirectToRoute('app_article');
-        }
-        else {
+        } else {
             print($form->getErrors(true, false));
         }
-        
+
         return $this->render('article/edit.html.twig', [
             'form' => $form->createView(),
             'article' => $article,

@@ -5,24 +5,14 @@
 	<link rel="stylesheet" href="{{ asset('css/articleEdit.css') }}">
 {% endblock %}
 
-{% block title %}Modifier un article
-{% endblock %}
+{% block title %}Modifier un article{% endblock %}
 
 {% block body %}
-	<h1>Modification
-		{{ article.nom }}</h1>
-
-
-	<form
-		method="POST" action="{{ url('app_article_edit', {'id': article.id}) }}">
-		<!--{{ form_widget(form._token) }}-->
-		{{ form_row(form.nom) }}
-		{{ form_row(form.price) }}
-		{{ form_row(form.quantite) }}
-		{{ form_row(form.description) }}
-		<input type="hidden" name="id" value="{{ article.id }}">
-
+	<h1>Modifier un article</h1>
+	
+	{{ form_start(form) }}
+		{{ include('article/_form.html.twig') }}
 		<button type="submit">Modifier</button>
-	</form>
+	{{ form_end(form) }}
 
 {% endblock %}

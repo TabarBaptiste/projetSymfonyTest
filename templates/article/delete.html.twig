@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/delete.css') }}">
+{% endblock %}
+
 {% block body %}
     <h1>Supprimer l'article "{{ article.nom }}"</h1>
 

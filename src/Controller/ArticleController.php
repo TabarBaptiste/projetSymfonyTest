@@ -12,11 +12,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ArticleController extends AbstractController
 {
     private $entityManager;
-
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
@@ -92,6 +92,36 @@ class ArticleController extends AbstractController
         return $this->render('article/edit.html.twig', [
             'form' => $form->createView(),
             'article' => $article,
+        ]);
+    }
+
+    #[Route('/article/delete/{id}', name: 'app_article_delete', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
+    public function delete(Article $article, Request $request, $id): Response
+    {
+        $entityManager = $this->entityManager;
+        $article = $entityManager->getRepository(Article::class)->find($id);
+
+        $form = $this->createFormBuilder()
+            ->setAction($this->generateUrl('app_article_delete', ['id' => $article->getId()]))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->entityManager;
+            $em->remove($article);
+            $em->flush();
+
+            $this->addFlash('success', 'L\'article a été supprimé avec succès.');
+
+            return $this->redirectToRoute('app_article');
+        } else {
+            print($form->getErrors(true, false));
+        }
+
+        return $this->render('article/delete.html.twig', [
+            'article' => $article,
+            'deleteForm' => $form->createView(),
         ]);
     }
 

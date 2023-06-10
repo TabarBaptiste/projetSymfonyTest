@@ -1,0 +1,7 @@
+vich_uploader:
+    db_driver: orm # Utilisez "orm" si vous utilisez Doctrine ORM
+    mappings:
+        article_image: # Le nom de votre mapping, vous pouvez le choisir librement
+            uri_prefix: /uploads/articles # L'URI préfixe pour accéder aux images
+            upload_destination: '%kernel.project_dir%/public/uploads/articles' # Le chemin de destination pour enregistrer les images
+            namer: vich_uploader.namer_uniqid # Utilisez le namer "vich_uploader.namer_uniqid" pour générer des noms de fichiers uniques

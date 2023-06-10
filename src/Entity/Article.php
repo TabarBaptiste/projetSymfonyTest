@@ -66,7 +66,7 @@ class Article
     public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
-        
+
         return $this;
     }
 

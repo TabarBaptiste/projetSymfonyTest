@@ -5,14 +5,18 @@
 	<link rel="stylesheet" href="{{ asset('css/articleEdit.css') }}">
 {% endblock %}
 
-{% block title %}Modifier un article{% endblock %}
+{% block title %}Modifier un article
+{% endblock %}
 
 {% block body %}
 	<h1>Modifier un article</h1>
-	
+
 	{{ form_start(form) }}
-		{{ include('article/_form.html.twig') }}
-		<button type="submit">Modifier</button>
+	{{ include('article/_form.html.twig') }}
+	<button type="submit">Modifier</button>
+	<button type="reset">Annuler</button>
 	{{ form_end(form) }}
+
+	<a href="{{ path('app_article') }}">Retour</a>
 
 {% endblock %}

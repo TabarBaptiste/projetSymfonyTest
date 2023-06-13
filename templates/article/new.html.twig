@@ -2,23 +2,25 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/articleNew.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/articleNewe.css') }}">
 {% endblock %}
 
 {% block title %}Ajouter un article
 {% endblock %}
 
 {% block body %}
-	<h1>Ajouter un article</h1>
+	{{ include ('_header.html.twig') }}
+	<div class="corp">
+		<h1>Ajouter un article</h1>
 
-	{{ form_start(form) }}
+		{{ form_start(form) }}
 
-	{{ include ('article/_form.html.twig') }}
+		{{ include ('article/_form.html.twig') }}
 
-	<button type="submit">Ajouter</button>
+		<button type="submit">Ajouter</button>
 
-	{{ form_end(form) }}
+		{{ form_end(form) }}
 
-	<a href="{{ path('app_article') }}" class="return-link">Retour</a>
-
+		<a href="{{ path('app_article') }}" class="return-link">Retour</a>
+	</div>
 {% endblock %}

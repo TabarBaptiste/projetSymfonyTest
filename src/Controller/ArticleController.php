@@ -19,6 +19,12 @@ class ArticleController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    #[Route('/', name: 'app_home')]
+    public function home(): Response
+    {
+        return $this->render('article/index.html.twig');
+    }
+
     #[Route('/article', name: 'app_article')]
     public function index(): Response
     {
@@ -78,24 +84,25 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/article/edit/{id}', name: 'app_article_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function edit(Article $article, Request $request, $id): Response{
+    public function edit(Article $article, Request $request, $id): Response
+    {
         $entityManager = $this->entityManager;
         $article = $entityManager->getRepository(Article::class)->find($id);
 
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->entityManager;
             $em->flush();
 
             return $this->redirectToRoute('app_article');
         }
-    
+
         return $this->render("article/edit.html.twig", [
             "form" => $form->createView(),
             'articles' => $article
         ]);
-    
+
     }
 
 }

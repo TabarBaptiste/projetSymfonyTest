@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.corp {
+    margin-left: 6%;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+}
+
+.card-image {
+    /* Styles pour l'image */
+}
+
+.card-body {
+    /* Styles pour le corps de la carte */
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-price {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.card-quantity {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.card-description {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.card-footer {
+    margin-top: 10px;
+}
+
+.card-footer a {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.modifier {
+    display: inline-block;
+    padding: 6px 16px;
+    background-color: #4caf50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    margin: 0.5em auto;
+    max-width: 800px;
+}
+
+.modifier:hover {
+    background-color: #45a049;
+}
+
+.supprimer {
+    display: inline-block;
+    padding: 6px 16px;
+    background-color: #e05656;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    margin: 0.5em auto;
+    max-width: 800px;
+}
+
+.supprimer:hover {
+    background-color: #a04545;
+}

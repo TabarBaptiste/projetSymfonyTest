@@ -2,21 +2,27 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/articleEdit.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/articleEdite.css') }}">
 {% endblock %}
 
 {% block title %}Modifier un article
 {% endblock %}
 
 {% block body %}
-	<h1>Modifier un article</h1>
+	<div class="head">
+		{{ include ('_header.html.twig') }}
+	</div>
 
-	{{ form_start(form) }}
-	{{ include('article/_form.html.twig') }}
-	<button type="submit">Modifier</button>
-	<button type="reset">Annuler</button>
-	{{ form_end(form) }}
+	<div class="corp">
 
-	<a href="{{ path('app_article') }}" class="return-link">Retour</a>
+		<h1>Modifier un article</h1>
 
+		{{ form_start(form) }}
+		{{ include('article/_form.html.twig') }}
+		<button type="submit">Modifier</button>
+		<button type="reset">Annuler</button>
+		{{ form_end(form) }}
+
+		<a href="{{ path('app_article') }}" class="return-link">Retour</a>
+	</div>
 {% endblock %}

@@ -1,47 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/article.css') }}">
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/articlee.css') }}">
 {% endblock %}
 
-{% block title %}Liste des articles
-{% endblock %}
+{% block title %}Liste des articles{% endblock %}
 
 {% block body %}
-	<h1>Liste des articles</h1>
+    <div class="head">
+        {{ include ('_header.html.twig') }}
+    </div>
 
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Photo</th>
-				<th>Nom</th>
-				<th>Prix</th>
-				<th>Quantité</th>
-				<th>Description</th>
-				<th>Modifier</th>
-				<th>Supprimer</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for article in articles %}
-				<tr>
-					<td>{{ article.id }}</td>
-					<td><!--<img src="uploads/articles/{{ article.nom }}.jpg"--></td>
-					<td>{{ article.nom }}</td>
-					<td>{{ article.price }}</td>
-					<td>{{ article.quantite }}</td>
-					<td>{{ article.description }}</td>
-					<td>
-						<!--{{ dump(article.id) }}-->
-						<a href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
-					</td>
-					<td>
-						<a href="{{ path('app_article_delete', {'id': article.id}) }}">Supprimer</a>
-					</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+    <div class="corp">
+        <h1>Liste des articles</h1>
+
+        <div class="card-container">
+            {% for article in articles %}
+                <div class="card">
+                    <div class="card-image">
+                        <!--<img src="uploads/articles/{{ article.nom }}.jpg">-->
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">{{ article.nom }}</h2>
+                        <p class="card-price">Prix: {{ article.price }}</p>
+                        <p class="card-quantity">Quantité: {{ article.quantite }}</p>
+                        <p class="card-description">{{ article.description }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="modifier">Modifier</a>
+                        <a href="{{ path('app_article_delete', {'id': article.id}) }}"class="supprimer">Supprimer</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

@@ -12,8 +12,20 @@ body {
     flex-wrap: wrap;
     gap: 20px;
     padding: 0;
+    animation: fade-in 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 .card {
     background-color: #fff;
     border-radius: 4px;
